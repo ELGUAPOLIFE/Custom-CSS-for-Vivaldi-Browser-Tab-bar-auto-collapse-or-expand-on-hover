@@ -1,0 +1,1 @@
+# Custom-CSS-for-Vivaldi-Browser-Tab-bar-auto-collapse-or-expand-on-hover
