@@ -13,3 +13,7 @@
 2. In some browser profiles, New tab + icon jumps upward during collapsed when both (not just one) trash can and sync tab button enabled in tab bar. When expanded + icon comes to normal position.
 
 If anyone can fix these issues I will be grateful.
+<video width="400" controls>
+  <source src="C:\Users\User\OneDrive\Videos\Screen Recordings\Screen Recording 2025-08-26 154906.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
