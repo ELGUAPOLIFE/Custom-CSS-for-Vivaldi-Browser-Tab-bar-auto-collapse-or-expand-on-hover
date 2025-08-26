@@ -135,9 +135,10 @@
 .inner #webpage-stack {
   margin-left: 40px;
 }
+
  
 .inner:has(#tabs-subcontainer:is(.left, .right)) #webpage-stack {
-  margin-left: 64px;
+  margin-left: 80px;
 }
  
 .fullscreen #webpage-stack {
@@ -215,3 +216,460 @@ span.tab-audio {
 #tabs-subcontainer.right:hover .button-toolbar.workspace-popup.tabbar-workspace-button {
     transform: none !important;
 }
+
+/* ==== Dynamic Effects for Vivaldi (Neon Theme) ==== */
+
+/* Smooth transitions for all tabs */
+.tab {
+  transition: 
+    background 0.4s ease,
+    transform 0.2s ease,
+    box-shadow 0.4s ease;
+}
+
+/* Glow & scale on hover (inactive tabs only) */
+.tab:not(.active):hover {
+  background-color: rgba(0, 255, 200, 0.08) !important;
+  transform: scale(1.04);
+  box-shadow: 0 0 12px rgba(0, 255, 200, 0.9); /* neon cyan glow */
+}
+
+/* Active tab with animated neon gradient */
+@keyframes activeTabGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.tab.active {
+  background: linear-gradient(270deg, #00fff7, #ff00f7); /* neon cyan to neon magenta */
+  background-size: 200% 200%;
+  animation: activeTabGradient 3s linear infinite;
+  color: white !important;
+  text-shadow: 0 0 6px #00fff7, 0 0 10px #ff00f7; /* neon text glow */
+  box-shadow: 0 0 15px rgba(255, 0, 247, 0.9), 0 0 25px rgba(0, 255, 247, 0.7);
+}
+
+/* Click bounce effect */
+.tab:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+/* Slight lift when hovering over buttons */
+.button-toolbar:hover {
+  transform: translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+/* Neon glow on button hover */
+.button-toolbar:hover .button-icon {
+  filter: drop-shadow(0 0 6px #00fff7) drop-shadow(0 0 10px #ff00f7);
+}
+
+/* TODO
+Suggestions?
+*/
+
+:root {
+    --lessTransparent: rgba(0,0,0,0.4); /* fallback */
+    --customRadius: 8px; /* NOT USING NOW */
+
+    /* New adaptive overlay system */
+    --overlayDark: rgba(0, 0, 0, 0.4);
+    --overlayLight: rgba(255, 255, 255, 0.4);
+}
+
+/* set theme-aware overlay */
+.theme-dark {
+    --overlayColor: var(--overlayDark);
+}
+.theme-light {
+    --overlayColor: var(--overlayLight);
+}
+
+/* MAINBAR */
+
+#browser.win.address-top .toolbar-mainbar:has(.window-buttongroup.on-mainbar),
+#browser.linux.address-top .toolbar-mainbar:has(.window-buttongroup.on-mainbar) {
+    min-height: calc(44px / var(--uiZoomLevel));
+}
+
+.density-on .UrlBar-SearchField, 
+.density-on .UrlBar-AddressField {
+    height: 34px;
+}
+
+.disable-titlebar#browser.win .window-buttongroup {
+    height: 44px;
+}
+
+#browser.win .window-buttongroup button.window-close {
+    border-top-right-radius: var(--radius);
+    border-bottom-right-radius: var(--radius); 
+}
+
+.mainbar {
+    background-color: var(--overlayColor);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    margin: 5px;
+    border-radius: var(--radius);
+}
+
+.SearchField, .UrlBar-AddressField {
+    border: none !important;
+    background-color: transparent;
+}
+
+.SearchField:hover, .UrlBar-AddressField:hover,
+.color-behind-tabs-on .SearchField:focus-within, 
+.color-behind-tabs-on .MailSearchField-Inner:focus-within, 
+.color-behind-tabs-on .UrlBar-AddressField:focus-within {
+    background-color: var(--overlayColor);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.UrlFragment-Wrapper--ShouldHighlight {
+    --HighlightColor: var(--colorFg);
+    --LowlightColor: var(--colorFg);
+}
+
+.address-top .mainbar { border-bottom: none; }
+
+.mainbar button:hover,
+#browser:not(.tabs-top) .vivaldi:hover, 
+#browser:not(.tabs-top) .vivaldi:focus-visible,
+.theme-dark#browser.win .window-buttongroup button:hover {
+    background-color: var(--overlayColor);
+    backdrop-filter: blur(6px);
+}
+
+.disable-titlebar.address-top#browser:not(.tabs-top) .vivaldi {
+    margin: 0 5px;
+}
+
+/* SIDEBAR */
+
+#switch { padding-top: 5px; }
+
+div#main.right #panels-container {
+    padding-bottom: 5px;
+}
+
+.density-on #switch {
+    background-color: var(--overlayColor);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--radius);
+    padding-bottom: 5px;
+    padding-right: 4px;
+    padding-left: 4px;
+}
+
+#panels-container { background-color: transparent; margin-right: 5px; }
+
+#panels .webpanel-stack .webpanel .webpanel-content {
+    margin-right: 7px;
+    border-bottom-right-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+}
+
+#panels-container.right:not(.icons) .panel-group, 
+#panels-container.right.icons:not(:has(.SlideBar)) { border-left: none; }
+
+#panels-container.overlay .panel-group,
+.ExtensionToggleIcon.ExtensionToggleIcon--Expanded,
+.ExtensionIcon--Hidden { background-color: transparent; }
+
+#panels-container button:hover,
+.ExtensionIcon--Hidden:hover, 
+.ExtensionIcon--Hidden:active,
+.toolbar-panel > .button-toolbar > button.button-pressed, 
+.toolbar-panel .toolbar-extensions .button-toolbar > button.button-pressed, 
+.toolbar-panel .page-zoom-controls .button-toolbar > button.button-pressed,
+.density-on #switch .addwebpanel-wrapper > button.active button, 
+.density-on #switch > .button-toolbar.active button, 
+.density-on #switch > * > .button-toolbar.active button, 
+.density-on #switch > button.active button {
+    background-color: var(--overlayColor);
+    backdrop-filter: blur(6px);
+}
+
+/* INNER ROUND BORDERS */
+
+#browser:not(.fullscreen) #webpage-stack {
+    border-radius: var(--radius);
+    margin: 0 3px 5px 44px;
+}
+
+/* SPEED DIAL */
+.SpeedDial--Thumbnail {
+    background-color: var(--overlayColor);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: none;
+}
+
+/* CTRL+F */
+.find-in-page-wrapper {
+    background-color: var(--overlayColor);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+
+
+/* BOOKMARK BAR */
+.bookmark-bar {
+    background-color: var(--overlayColor) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-radius: var(--radius);
+    margin: 4px;
+    padding: 4px 8px;
+    min-height: 30px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.bookmark-bar .observer { background: transparent !important; }
+
+.bookmark-bar button,
+.bookmark-bar .button-toolbar > button,
+.bookmark-bar .bookmark-item,
+.bookmark-bar .bookmarkbar-item,
+.bookmark-bar .toolbar > .button-toolbar > button {
+    background-color: transparent !important;
+    color: var(--colorFg) !important;
+    border: none !important;
+    border-radius: var(--radius);
+    height: 30px !important;
+    line-height: 30px !important;
+    padding: 0 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    transition: background-color 0.2s ease, backdrop-filter 0.2s ease, color 0.2s ease;
+}
+
+.bookmark-bar .button-title,
+.bookmark-bar .title,
+.bookmark-bar .bookmark-label { color: var(--colorFg) !important; }
+
+.bookmark-bar button:hover,
+.bookmark-bar .button-toolbar > button:hover,
+.bookmark-bar .bookmark-item:hover,
+.bookmark-bar .bookmarkbar-item:hover {
+    background-color: var(--overlayColor) !important;
+    backdrop-filter: blur(calc(var(--blurStrength) * 0.5));
+    -webkit-backdrop-filter: blur(calc(var(--blurStrength) * 0.5));
+}
+
+.bookmark-bar button:active,
+.bookmark-bar .button-toolbar > button:active,
+.bookmark-bar .bookmark-item:active,
+.bookmark-bar .bookmarkbar-item:active,
+.bookmark-bar .button-toolbar > button[aria-pressed="true"] {
+    background-color: var(--overlayColor) !important;
+    backdrop-filter: blur(calc(var(--blurStrength) * 0.7));
+    -webkit-backdrop-filter: blur(calc(var(--blurStrength) * 0.7));
+}
+
+.bookmark-bar .separator {
+    opacity: 0.5;
+    border-right: 1px solid color-mix(in srgb, var(--colorFg), transparent 60%) !important;
+}
+
+/* ========================================================= */
+/* SPEED DIAL SEARCH BAR (blurred idle + consistent roundness) */
+/* ========================================================= */
+
+/* Idle blurred */
+.startpage .SearchField:not(:hover):not(:focus-within),
+.StartPage .SearchField:not(:hover):not(:focus-within),
+.SpeedDial .SearchField:not(:hover):not(:focus-within),
+.SpeedDialView .SearchField:not(:hover):not(:focus-within) {
+    background-color: var(--overlayColor) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: none !important;
+    transition: background-color 0.18s ease, backdrop-filter 0.18s ease;
+}
+
+/* Stronger blur when hovered/focused */
+.startpage .SearchField:hover,
+.startpage .SearchField:focus-within,
+.StartPage .SearchField:hover,
+.StartPage .SearchField:focus-within,
+.SpeedDial .SearchField:hover,
+.SpeedDial .SearchField:focus-within,
+.SpeedDialView .SearchField:hover,
+.SpeedDialView .SearchField:focus-within {
+    background-color: var(--overlayColor) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-radius: var(--radius) !important; /* keep corners consistent */
+}
+
+/* Inner input transparency */
+.startpage .SearchField input,
+.StartPage .SearchField input,
+.SpeedDial .SearchField input,
+.SpeedDialView .SearchField input {
+    background: transparent !important;
+    color: inherit !important;
+    border-radius: var(--radius) !important;
+}
+.mainbar,
+.bookmark-bar {
+    z-index: 10; /* keep reasonable */
+}
+
+/* == Startpage Navigation Mod integrated with Vivaldi theme - Adjusted Padding == */
+
+/* Config variables for Startpage Navigation Mod */
+:root {
+    --startpageNavBtnPrimary: var(--colorFg);
+    --startpageNavBtnSecondary: var(--colorHighlightBg);
+    --startpageNavBtnInactive: var(--overlayColor);
+    --startpageNavBtnRounding: 14px;
+    --startpageNavBtnHeight: 23px;
+    --startpageNavBtnMargin: 10px;
+    --startpageNavBackground: var(--overlayColor);
+    --startpageNavPaddingOnTop: 10px;      /* decreased padding */
+    --startpageNavPaddingOnBottom: 10px;   /* decreased padding */
+    --startpageNavTextShadow: none;
+    --startpageNavIconShadow: drop-shadow(0 0 2px var(--startpageNavBtnSecondary));
+}
+
+/* Startpage Nav Bar background and spacing */
+.startpage .startpage-navigation {
+    background-color: var(--startpageNavBackground);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding-top: var(--startpageNavPaddingOnTop);
+    padding-bottom: calc(var(--startpageNavPaddingOnBottom) - 2px);
+    min-height: unset;
+    box-shadow: none;
+}
+
+/* Remove background from folder nav buttons */
+.startpage .startpage-folder-navigation button {
+    background-color: var(--startpageNavBtnInactive);
+}
+
+/* Format buttons for Startpage Nav Bar */
+.startpage .startpage-navigation .button-startpage,
+.startpage .startpage-folder-navigation .button-startpage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--startpageNavBtnHeight);
+    min-height: unset;
+    border-radius: var(--startpageNavBtnRounding) !important;
+    border: 1.2px solid var(--startpageNavBtnPrimary);
+    background-color: var(--startpageNavBtnInactive);
+    color: var(--startpageNavBtnPrimary);
+    margin: 0 var(--startpageNavBtnMargin) !important;
+    text-shadow: var(--startpageNavTextShadow);
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    transition: 0.1s;
+    font-size: 11px;
+    font-weight: 500;
+    -webkit-mask-image: unset;
+}
+
+/* Hover or active state for buttons */
+.startpage .startpage-navigation .button-startpage.active,
+.startpage .startpage-navigation .button-startpage:hover,
+.startpage .startpage-folder-navigation .button-startpage:hover {
+    color: var(--startpageNavBtnSecondary);
+    background-color: var(--overlayColor);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    text-shadow: none;
+}
+
+/* Format icons for Startpage Nav Bar buttons */
+.startpage .startpage-navigation .button-startpage svg,
+.startpage .startpage-folder-navigation .button-startpage svg {
+    color: var(--startpageNavBtnPrimary);
+    filter: var(--startpageNavIconShadow);
+    height: 2.1em;
+    width: auto;
+}
+
+.startpage .startpage-navigation .button-startpage.add-set svg {
+    margin: 0;
+    height: 16px; /* fix alignment */
+}
+
+/* Hover/active icons */
+.startpage .startpage-navigation .button-startpage.active svg,
+.startpage .startpage-navigation .button-startpage:hover svg,
+.startpage .startpage-folder-navigation .button-startpage:hover svg {
+    color: var(--startpageNavBtnSecondary);
+    filter: unset;
+}
+
+/* Speed dial folder back button fixes */
+button.button-startpage.up-level svg {
+    position: unset;
+    margin: 0 4px;
+}
+button.button-startpage.up-level span {
+    display: flex;
+}
+.button-startpage.up-level {
+    padding: 0 14px 0 6px;
+}
+
+/* Center the speed dial folder back button */
+.startpage .startpage-folder-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Remove border between navigation groups */
+.startpage .startpage-navigation .startpage-navigation-group:last-of-type {
+    border: unset;
+}
+
+/* Remove color gradient after buttons */
+button.button-startpage:after {
+    content: unset;
+}
+
+/* Make new speed dial folder add button smaller */
+.startpage .startpage-navigation .button-startpage.add-set {
+    padding-left: 1px;
+    padding-right: 1px;
+    min-width: 27px;
+}
+
+/* Fill the new speed dial add button icon correctly */
+button.button-startpage.add-set svg path {
+    fill: var(--startpageNavBtnPrimary);
+}
+button.button-startpage.add-set:hover svg path {
+    fill: var(--startpageNavBtnSecondary);
+}
+
+/* Remove gap from top of speed dial items */
+.speeddial {
+    margin-top: 0;
+    padding-top: 2px;
+}
+
+/* Fix search-enabled spacing */
+.sdwrapper .iconmenu-container.searchfield {
+    margin: 0px auto 25px;
+}
+
+/* Adjust notes navigation icon size */
+.startpage .startpage-navigation .button-startpage[data-id="notes"] svg {
+    transform: scale(1.45);
+}
+
