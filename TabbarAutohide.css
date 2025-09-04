@@ -9,135 +9,165 @@
     --overlayLight: rgba(255, 255, 255, 0.4);
 }
 
-.tabbar-wrapper .tabbar-wrapper, #tabs-container.left, #tabs-subcontainer.left, #tabs-container.right, #tabs-subcontainer.right, .button-toolbar.workspace-popup.tabbar-workspace-button { min-width: 40px; transition: min-width 200ms ease-in-out !important; /* Smooth expand/collapse */ background-color: var(--overlayColor); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: var(--radius); } .tabbar-wrapper .tabbar-wrapper:hover, #tabs-container.left:hover, #tabs-subcontainer.left:hover, #tabs-container.right:hover, #tabs-subcontainer.right:hover, .button-toolbar.workspace-popup.tabbar-workspace-button:hover { min-width: 180px !important; transition: min-width 200ms ease-in-out !important; transition-delay: 150ms !important; /* Slight delay for better feel */ background-color: var(--overlayColor); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: var(--radius); }
+.tabbar-wrapper .tabbar-wrapper,
+#tabs-container.left,
+#tabs-subcontainer.left,
+#tabs-container.right,
+#tabs-subcontainer.right,
+.button-toolbar.workspace-popup.tabbar-workspace-button {
+    min-width: 40px;
+    transition: min-width 200ms ease-in-out !important; /* Smooth expand/collapse */
+    background-color: var(--overlayColor);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: var(--radius);
+}
 
- 
-.button-toolbar.workspace-popup.tabbar-workspace-button:hover:has(+ #tabs-tabbar-container > #tabs-subcontainer) { min-width: 180px !important; transition: min-width 200ms ease-in-out !important; transition-delay: 150ms !important; }
- 
+.tabbar-wrapper .tabbar-wrapper:hover,
+#tabs-container.left:hover,
+#tabs-subcontainer.left:hover,
+#tabs-container.right:hover,
+#tabs-subcontainer.right:hover,
+.button-toolbar.workspace-popup.tabbar-workspace-button:hover {
+    min-width: 180px !important;
+    transition: min-width 200ms ease-in-out !important;
+    transition-delay: 150ms !important; /* Slight delay for better feel */
+    background-color: var(--overlayColor);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: var(--radius);
+}
+
+.button-toolbar.workspace-popup.tabbar-workspace-button:hover:has(+ #tabs-tabbar-container > #tabs-subcontainer) {
+    min-width: 180px !important;
+    transition: min-width 200ms ease-in-out !important;
+    transition-delay: 150ms !important;
+}
+
 .tabbar-wrapper .tabbar-wrapper:hover:has(#tabs-tabbar-container > #tabs-subcontainer) {
     width: 180px !important;
     transition: min-width 200ms ease-in-out !important;
     transition-delay: 300ms !important; /* Smoother timing */
 }
- 
+
 .button-toolbar.workspace-popup.tabbar-workspace-button > button {
     justify-content: left !important;
 }
- 
+
 #browser:not(.alt-tabs) .tab-position .tab:hover.tab-small:not(.tab-mini).active .title,
 #browser:not(.alt-tabs) .tab-position .tab.force-hover.tab-small:not(.tab-mini).active .title {
     display: flex !important;
 }
- 
+
 .tabbar-workspace-button {
     width: 100% !important;
 }
- 
+
 #tabs-tabbar-container.left,
 #tabs-tabbar-container.right {
     width: auto !important;
     min-width: 32px;
 }
- 
+
 .toolbar-tabbar.sync-and-trash-container {
     flex-direction: column;
 }
 
 /* tabs list gets the scrollable middle */
 #tabs-tabbar-container:is(.left, .right) #tabs-subcontainer {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 #tabs-tabbar-container:is(.left, .right) #tabs-subcontainer .tabbar-wrapper {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
 }
-
 
 /* leftside 1st button */
 .toolbar-mainbar > div:first-child > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-	transform: translate(3px, 29px);
-}
- 
-.toolbar-mainbar > div:first-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-	transform: translate(24px, 18.5px);
-}
- 
-/* rightside button */
-.toolbar-mainbar > div:nth-last-child(4) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-	transform: translate(-10px, 29px);
-}
- 
-.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-	transform: translate(-44px, 29px);
-}
- 
-.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls input[type=range]::after {
-	left: 40%;
-}
- 
-.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-	transform: translate(-24px, 18.5px);
-}
- 
-.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-	transform: translate(-78px, 29px);
-}
- 
-.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls input[type=range]::after {
-	left: 64%;
-}
- 
-.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-	transform: translate(-58px, 18.5px);
-}
- 
-.toolbar-mainbar > div:last-child > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-	transform: translate(-112px, 29px);
-}
- 
-.toolbar-mainbar > div:last-child > .page-zoom-controls input[type=range]::after {
-	left: 88%;
-}
- 
-.toolbar-mainbar > div:last-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-	transform: translate(-92px, 18.5px);
-}
- 
-/** Make the expanded tabbar float on the webpage. Use with tab-expansion mod. **/
-#main > .inner > div:has(#tabs-tabbar-container:is(.left, .right)) {
-  position: absolute;
-  z-index: 2;
-  opacity: 1;
-  background-color: var(--colorBg);
-  height: 100% !important;
-}
- 
-#browser.transparent-tabbar .inner > div:has(#tabs-tabbar-container:is(.left, .right)) {
-  background-color: var(--colorImageFgHeaviest);
-}
- 
-.inner #webpage-stack {
-  margin-left: 40px;
+    transform: translate(3px, 29px);
 }
 
- 
+.toolbar-mainbar > div:first-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+    transform: translate(24px, 18.5px);
+}
+
+/* rightside button */
+.toolbar-mainbar > div:nth-last-child(4) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+    transform: translate(-10px, 29px);
+}
+
+.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+    transform: translate(-44px, 29px);
+}
+
+.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls input[type=range]::after {
+    left: 40%;
+}
+
+.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+    transform: translate(-24px, 18.5px);
+}
+
+.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+    transform: translate(-78px, 29px);
+}
+
+.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls input[type=range]::after {
+    left: 64%;
+}
+
+.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+    transform: translate(-58px, 18.5px);
+}
+
+.toolbar-mainbar > div:last-child > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+    transform: translate(-112px, 29px);
+}
+
+.toolbar-mainbar > div:last-child > .page-zoom-controls input[type=range]::after {
+    left: 88%;
+}
+
+.toolbar-mainbar > div:last-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+    transform: translate(-92px, 18.5px);
+}
+
+/** Make the expanded tabbar float on the webpage. Use with tab-expansion mod. **/
+#main > .inner > div:has(#tabs-tabbar-container:is(.left, .right)) {
+    position: absolute;
+    z-index: 2;
+    opacity: 1;
+    background-color: var(--colorBg);
+    height: 100% !important;
+}
+
+#browser.transparent-tabbar .inner > div:has(#tabs-tabbar-container:is(.left, .right)) {
+    background-color: var(--colorImageFgHeaviest);
+}
+
+.inner #webpage-stack {
+    margin-left: 40px;
+}
+
 .inner:has(#tabs-subcontainer:is(.left, .right)) #webpage-stack {
-  margin-left: 80px;
+    margin-left: 80px;
 }
- 
+
 .fullscreen #webpage-stack {
-  margin-left: 0px;
+    margin-left: 0px;
 }
- 
+
 .theme-dark .tab-position .tab.active .tab-header .favicon {
-  filter: none !important;
+    filter: none !important;
 }
- 
+
 /* Fixing favicon */
-.tab-header {padding-left: 7.4px !important;}
+.tab-header {
+    padding-left: 7.4px !important;
+}
 
 /* Show audio/speaker icon only on tab hover */
 span.tab-audio {
@@ -149,7 +179,7 @@ span.tab-audio {
 #tabs-subcontainer:hover span.tab-audio {
     opacity: 1;
 }
- 
+
 /* Smooth slide + slight fade for tabbar */
 #tabs-tabbar-container.left,
 #tabs-tabbar-container.right {
@@ -163,7 +193,14 @@ span.tab-audio {
 }
 
 /* Collapse state force reset for workspace (smooth) */
-#tabs-tabbar-container.left:not(:hover), #tabs-tabbar-container.right:not(:hover), #tabs-subcontainer.left:not(:hover), #tabs-subcontainer.right:not(:hover) { min-width: 40px !important; width: 40px !important; transition: min-width 200ms ease-in-out !important; }
+#tabs-tabbar-container.left:not(:hover),
+#tabs-tabbar-container.right:not(:hover),
+#tabs-subcontainer.left:not(:hover),
+#tabs-subcontainer.right:not(:hover) {
+    min-width: 40px !important;
+    width: 40px !important;
+    transition: min-width 200ms ease-in-out !important;
+}
 
 /* Workspace button in collapsed state: icon only */
 .button-toolbar.workspace-popup.tabbar-workspace-button {
@@ -171,7 +208,6 @@ span.tab-audio {
     max-width: 55px !important;
     overflow: hidden !important;
 }
-
 
 /* adjust this to move more/less (positive = more to the right for left panel) */
 :root { --workspace-offset: 0px; }
@@ -198,61 +234,58 @@ span.tab-audio {
     transform: none !important;
 }
 
-
 /* ==== Dynamic Effects for Vivaldi (Neon Theme) ==== */
 
 /* Smooth transitions for all tabs */
 .tab {
-  transition: 
-    background 0.4s ease,
-    transform 0.2s ease,
-    box-shadow 0.4s ease;
+    transition:
+        background 0.4s ease,
+        transform 0.2s ease,
+        box-shadow 0.4s ease;
 }
 
 /* Glow & scale on hover (inactive tabs only) */
 .tab:not(.active):hover {
-  background-color: rgba(0, 255, 200, 0.08) !important;
-  transform: scale(1.04);
-  box-shadow: 0 0 12px rgba(0, 255, 200, 0.9); /* neon cyan glow */
+    background-color: rgba(0, 255, 200, 0.08) !important;
+    transform: scale(1.04);
+    box-shadow: 0 0 12px rgba(0, 255, 200, 0.9);
 }
 
 /* Active tab with animated neon gradient */
 @keyframes activeTabGradient {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
 .tab.active {
-  background: linear-gradient(270deg, #00fff7, #ff00f7); /* neon cyan to neon magenta */
-  background-size: 200% 200%;
-  animation: activeTabGradient 3s linear infinite;
-  color: white !important;
-  text-shadow: 0 0 6px #00fff7, 0 0 10px #ff00f7; /* neon text glow */
-  box-shadow: 0 0 15px rgba(255, 0, 247, 0.9), 0 0 25px rgba(0, 255, 247, 0.7);
+    background: linear-gradient(270deg, #00fff7, #ff00f7);
+    background-size: 200% 200%;
+    animation: activeTabGradient 3s linear infinite;
+    color: white !important;
+    text-shadow: 0 0 6px #00fff7, 0 0 10px #ff00f7;
+    box-shadow: 0 0 15px rgba(255, 0, 247, 0.9), 0 0 25px rgba(0, 255, 247, 0.7);
 }
 
 /* Click bounce effect */
 .tab:active {
-  transform: scale(0.95);
-  transition: transform 0.1s ease;
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
 }
 
 /* Slight lift when hovering over buttons */
 .button-toolbar:hover {
-  transform: translateY(-1px);
-  transition: transform 0.2s ease;
+    transform: translateY(-1px);
+    transition: transform 0.2s ease;
 }
 
 /* Neon glow on button hover */
 .button-toolbar:hover .button-icon {
-  filter: drop-shadow(0 0 6px #00fff7) drop-shadow(0 0 10px #ff00f7);
+    filter: drop-shadow(0 0 6px #00fff7) drop-shadow(0 0 10px #ff00f7);
 }
 
 /* TODO
 Suggestions?
 */
-
-
 
 /* set theme-aware overlay */
 .theme-dark {
@@ -269,7 +302,7 @@ Suggestions?
     min-height: calc(44px / var(--uiZoomLevel));
 }
 
-.density-on .UrlBar-SearchField, 
+.density-on .UrlBar-SearchField,
 .density-on .UrlBar-AddressField {
     height: 34px;
 }
@@ -280,7 +313,7 @@ Suggestions?
 
 #browser.win .window-buttongroup button.window-close {
     border-top-right-radius: var(--radius);
-    border-bottom-right-radius: var(--radius); 
+    border-bottom-right-radius: var(--radius);
 }
 
 .mainbar {
@@ -291,14 +324,16 @@ Suggestions?
     border-radius: var(--radius);
 }
 
-.SearchField, .UrlBar-AddressField {
+.SearchField,
+.UrlBar-AddressField {
     border: none !important;
     background-color: transparent;
 }
 
-.SearchField:hover, .UrlBar-AddressField:hover,
-.color-behind-tabs-on .SearchField:focus-within, 
-.color-behind-tabs-on .MailSearchField-Inner:focus-within, 
+.SearchField:hover,
+.UrlBar-AddressField:hover,
+.color-behind-tabs-on .SearchField:focus-within,
+.color-behind-tabs-on .MailSearchField-Inner:focus-within,
 .color-behind-tabs-on .UrlBar-AddressField:focus-within {
     background-color: var(--overlayColor);
     backdrop-filter: blur(8px);
@@ -313,7 +348,7 @@ Suggestions?
 .address-top .mainbar { border-bottom: none; }
 
 .mainbar button:hover,
-#browser:not(.tabs-top) .vivaldi:hover, 
+#browser:not(.tabs-top) .vivaldi:hover,
 #browser:not(.tabs-top) .vivaldi:focus-visible,
 .theme-dark#browser.win .window-buttongroup button:hover {
     background-color: var(--overlayColor);
@@ -350,7 +385,7 @@ div#main.right #panels-container {
     border-top-right-radius: var(--radius);
 }
 
-#panels-container.right:not(.icons) .panel-group, 
+#panels-container.right:not(.icons) .panel-group,
 #panels-container.right.icons:not(:has(.SlideBar)) { border-left: none; }
 
 #panels-container.overlay .panel-group,
@@ -358,14 +393,14 @@ div#main.right #panels-container {
 .ExtensionIcon--Hidden { background-color: transparent; }
 
 #panels-container button:hover,
-.ExtensionIcon--Hidden:hover, 
+.ExtensionIcon--Hidden:hover,
 .ExtensionIcon--Hidden:active,
-.toolbar-panel > .button-toolbar > button.button-pressed, 
-.toolbar-panel .toolbar-extensions .button-toolbar > button.button-pressed, 
+.toolbar-panel > .button-toolbar > button.button-pressed,
+.toolbar-panel .toolbar-extensions .button-toolbar > button.button-pressed,
 .toolbar-panel .page-zoom-controls .button-toolbar > button.button-pressed,
-.density-on #switch .addwebpanel-wrapper > button.active button, 
-.density-on #switch > .button-toolbar.active button, 
-.density-on #switch > * > .button-toolbar.active button, 
+.density-on #switch .addwebpanel-wrapper > button.active button,
+.density-on #switch > .button-toolbar.active button,
+.density-on #switch > * > .button-toolbar.active button,
 .density-on #switch > button.active button {
     background-color: var(--overlayColor);
     backdrop-filter: blur(6px);
@@ -392,8 +427,6 @@ div#main.right #panels-container {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
-
-
 
 /* BOOKMARK BAR */
 .bookmark-bar {
@@ -496,6 +529,7 @@ div#main.right #panels-container {
     color: inherit !important;
     border-radius: var(--radius) !important;
 }
+
 .mainbar,
 .bookmark-bar {
     z-index: 10; /* keep reasonable */
@@ -593,9 +627,11 @@ button.button-startpage.up-level svg {
     position: unset;
     margin: 0 4px;
 }
+
 button.button-startpage.up-level span {
     display: flex;
 }
+
 .button-startpage.up-level {
     padding: 0 14px 0 6px;
 }
@@ -628,6 +664,7 @@ button.button-startpage:after {
 button.button-startpage.add-set svg path {
     fill: var(--startpageNavBtnPrimary);
 }
+
 button.button-startpage.add-set:hover svg path {
     fill: var(--startpageNavBtnSecondary);
 }
@@ -650,7 +687,8 @@ button.button-startpage.add-set:hover svg path {
 
 /* TABS */
 
-#browser .tabbar-wrapper, #browser.tabs-top #header {
+#browser .tabbar-wrapper,
+#browser.tabs-top #header {
     background-color: transparent; /* BG COLOR OF TAB BAR PART 1 */
 }
 
@@ -673,21 +711,21 @@ button.button-startpage.add-set:hover svg path {
 }
 
 .separator hr { /* ADJUSTING SEPARATOR UNDER PINNED TABS */
-    /* border: 1px solid color-mix(in srgb, var(--colorBg), var(--lessTransparent)); */
     border: 1px solid color-mix(in srgb, var(--colorBg), var(--lessTransparent));
     background: color-mix(in srgb, var(--colorBg), var(--lessTransparent));
     opacity: 0.5;
     width: 100%;
     margin-top: 6px;
-} 
+}
 
 @media not (prefers-contrast: more) { /* HIDE TAB SCROLLBAR */
     ::-webkit-scrollbar {
-      display: none;
+        display: none;
     }
 }
 
-#tabs-container.left:has(.tab-strip.overflow), #tabs-container.right:has(.tab-strip.overflow) {
+#tabs-container.left:has(.tab-strip.overflow),
+#tabs-container.right:has(.tab-strip.overflow) {
     padding-right: 3px; /* FIXING SPACE NEXT TO TAB WHEN MANY TABS */
 }
 
@@ -713,21 +751,23 @@ button.button-startpage.add-set:hover svg path {
 
 .svg-tab-stack .stack-frame { /* BORDER COLOR OF TAB GROUP */
     /* stroke: transparent; */
-/*  stroke-width: 2px; */
-} 
+    /* stroke-width: 2px; */
+}
 
 #browser .tab-position.colored .tab:not(.active) {
     background-color: color-mix(in srgb, var(--colorBg), var(--lessTransparent));  /* BG COLOR OF TAB GROUP  */
     color: var(--colorFg);
 }
 
-#browser .tab-position.colored.accordion-toggle-arrow:hover, #browser .tab-position.colored .tab:not(.active):hover {
+#browser .tab-position.colored.accordion-toggle-arrow:hover,
+#browser .tab-position.colored .tab:not(.active):hover {
     background-color: var(--colorBg);  /* BG COLOR OF HOVER TAB IN GROUP */ 
 }
 
-#browser .tab-position.colored.accordion-toggle-arrow, #browser .tab-position.colored .tab.active {
+#browser .tab-position.colored.accordion-toggle-arrow,
+#browser .tab-position.colored .tab.active {
     background-color: var(--colorBg);  /* BG COLOR OF ACTIVE TAB IN GROUP */ 
-} 
+}
 
 #browser .tab-position.colored.accordion-toggle-arrow { /* ARROW SETTINGS */
     background-color: color-mix(in srgb, var(--colorBg), var(--lessTransparent));
@@ -742,31 +782,40 @@ button.button-startpage.add-set:hover svg path {
     background-color: var(--colorHighlightBg); /* BG COLOR OF TAB GROUP NUMBER */
 }
 
-.tabs-left #tabs-container .toolbar-tabbar-after, .tabs-right #tabs-container .toolbar-tabbar-after {
+.tabs-left #tabs-container .toolbar-tabbar-after,
+.tabs-right #tabs-container .toolbar-tabbar-after {
     margin-top: 13px; /* ADJUSTING NEW TAB ICON */
     margin-bottom: 2px;
 }
 
 /* WORKSPACES */
 
-.color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar, .color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar, .color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar:hover, .color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar:hover {
+.color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar,
+.color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar,
+.color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar:hover,
+.color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar:hover {
     color: var(--colorFg);
     margin-top: 5px;
-    /* border-radius: var(--radius); */
 } /* ADJUSTING WORKSPACE BUTTON */
 
-.tabs-left .button-toolbar.workspace-popup.tabbar-workspace-button, .tabs-right .button-toolbar.workspace-popup.tabbar-workspace-button {
+.tabs-left .button-toolbar.workspace-popup.tabbar-workspace-button,
+.tabs-right .button-toolbar.workspace-popup.tabbar-workspace-button {
     background-color: transparent; /* BG OF WORKSPACE BUTTON */
 }
 
-#tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar > button:active, #tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar > button:active, #tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover, #tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover {
+#tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar > button:active,
+#tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar > button:active,
+#tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover,
+#tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover {
     background-color: var(--colorBg); /* HOVER OF WORKSPACES */
 }
 
-.tabs-left #tabs-container:has(.tab-strip.overflow) .toolbar-tabbar-before, .tabs-left #tabs-container:has(.tab-strip.overflow) .toolbar-tabbar-after, .tabs-right #tabs-container:has(.tab-strip.overflow) .toolbar-tabbar-before, .tabs-right #tabs-container:has(.tab-strip.overflow) .toolbar-tabbar-after {
+.tabs-left #tabs-container:has(.tab-strip.overflow) .toolbar-tabbar-before,
+.tabs-left #tabs-container:has(.tab-strip.overflow) .toolbar-tabbar-after,
+.tabs-right #tabs-container:has(.tab-strip.overflow) .toolbar-tabbar-before,
+.tabs-right #tabs-container:has(.tab-strip.overflow) .toolbar-tabbar-after {
     padding: 0px 0px 3px 3px; /* FIXING SPACE WHEN MANY TABS */
 }
-
 
 /* TAB TILES MODE */
 
@@ -793,4 +842,3 @@ button.button-startpage.add-set:hover svg path {
 .isblurred .webpageview.tiled.active {
     box-shadow: 0 0 0 2px var(--colorHighlightBg); /* CHANGING COLOR OF BORDER OF ACTIVE WHEN BROWSER ISNT FOCUSED */
 }
-
