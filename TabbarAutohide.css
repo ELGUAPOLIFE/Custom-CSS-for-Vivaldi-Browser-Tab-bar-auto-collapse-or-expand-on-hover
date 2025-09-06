@@ -17,7 +17,6 @@
 .button-toolbar.workspace-popup.tabbar-workspace-button {
     min-width: 40px;
     transition: min-width 200ms ease-in-out !important; /* Smooth expand/collapse */
-    background-color: var(--overlayColor);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: var(--radius);
@@ -32,7 +31,6 @@
     min-width: 180px !important;
     transition: min-width 200ms ease-in-out !important;
     transition-delay: 150ms !important; /* Slight delay for better feel */
-    background-color: var(--overlayColor);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: var(--radius);
@@ -299,17 +297,18 @@ Suggestions?
 
 #browser.win.address-top .toolbar-mainbar:has(.window-buttongroup.on-mainbar),
 #browser.linux.address-top .toolbar-mainbar:has(.window-buttongroup.on-mainbar) {
-    min-height: calc(44px / var(--uiZoomLevel));
+    min-height: calc(40px / var(--uiZoomLevel));
 }
 
 .density-on .UrlBar-SearchField,
 .density-on .UrlBar-AddressField {
-    height: 34px;
+    height: 30px;
 }
 
 .disable-titlebar#browser.win .window-buttongroup {
-    height: 44px;
+    height: 40px;
 }
+
 
 #browser.win .window-buttongroup button.window-close {
     border-top-right-radius: var(--radius);
@@ -320,7 +319,7 @@ Suggestions?
     background-color: var(--overlayColor);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    margin: 5px;
+    margin: 4px;
     border-radius: var(--radius);
 }
 
@@ -372,12 +371,12 @@ div#main.right #panels-container {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: var(--radius);
-    padding-bottom: 5px;
+    padding-bottom: 4px;
     padding-right: 4px;
     padding-left: 0px;
 }
 
-#panels-container { background-color: transparent; margin-right: 5px; }
+#panels-container { background-color: transparent; margin-right: 4px; }
 
 #panels .webpanel-stack .webpanel .webpanel-content {
     margin-right: 7px;
@@ -410,7 +409,7 @@ div#main.right #panels-container {
 
 #browser:not(.fullscreen) #webpage-stack {
     border-radius: var(--radius);
-    margin: 0 1px 4px 45px;
+    margin: 0 1px 4px 50px;
 }
 
 /* SPEED DIAL */
@@ -689,13 +688,24 @@ button.button-startpage.add-set:hover svg path {
 
 #browser .tabbar-wrapper,
 #browser.tabs-top #header {
-    background-color: transparent; /* BG COLOR OF TAB BAR PART 1 */
+    background-color: var(--overlayColor); /* BG COLOR OF TAB BAR PART 1 */
+    margin-left: 2px;
+    border-radius: var(--radius);
+    margin-bottom: 4px;
 }
+
 
 #browser:not(.transparent-tabbar) #tabs-tabbar-container {
     background-color: color-mix(in srgb, var(--colorBg), var(--lessTransparent)); /* BG COLOR OF TAB BAR PART 2 */
-    margin-left: 5px;
+    margin-left: 0px;
     border-radius: var(--radius);
+}
+
+#browser:not(.transparent-tabbar) .tabbar-wrapper {
+    background-color: color-mix(in srgb, var(--colorBg), var(--lessTransparent)); /* BG COLOR OF TAB BAR PART 2 */
+    margin-left: 2px;
+    border-radius: var(--radius);
+    margin-bottom: 4px;
 }
 
 .tabs-left .tabbar-wrapper { /* BG COLOR OF TAB BAR PART 3 */
@@ -807,7 +817,9 @@ button.button-startpage.add-set:hover svg path {
 #tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar > button:active,
 #tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover,
 #tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover {
-    background-color: var(--colorBg); /* HOVER OF WORKSPACES */
+    background-color: rgba(0, 255, 200, 0.08) !important;
+    transform: scale(1.04);
+    box-shadow: 0 0 12px rgba(0, 255, 200, 0.9); /* HOVER OF WORKSPACES */
 }
 
 .tabs-left #tabs-container:has(.tab-strip.overflow) .toolbar-tabbar-before,
