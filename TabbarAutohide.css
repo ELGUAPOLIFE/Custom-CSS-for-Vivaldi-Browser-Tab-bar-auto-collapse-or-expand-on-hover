@@ -9,6 +9,14 @@
     --overlayLight: rgba(255, 255, 255, 0.4);
 }
 
+/* set theme-aware overlay */
+.theme-dark {
+    --overlayColor: var(--overlayDark);
+}
+.theme-light {
+    --overlayColor: var(--overlayLight);
+}
+
 .tabbar-wrapper,
 #tabs-container.left,
 #tabs-subcontainer.left,
@@ -284,14 +292,6 @@ span.tab-audio {
 /* TODO
 Suggestions?
 */
-
-/* set theme-aware overlay */
-.theme-dark {
-    --overlayColor: var(--overlayDark);
-}
-.theme-light {
-    --overlayColor: var(--overlayLight);
-}
 
 /* MAINBAR */
 
@@ -693,7 +693,6 @@ button.button-startpage.add-set:hover svg path {
     border-radius: var(--radius);
     margin-bottom: 4px;
 }
-
 
 #browser:not(.transparent-tabbar) #tabs-tabbar-container {
     background-color: color-mix(in srgb, var(--colorBg), var(--lessTransparent)); /* BG COLOR OF TAB BAR PART 2 */
