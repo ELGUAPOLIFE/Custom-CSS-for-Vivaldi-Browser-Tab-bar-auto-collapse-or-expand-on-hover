@@ -9,7 +9,7 @@
     --overlayLight: rgba(255, 255, 255, 0.4);
 }
 
-.tabbar-wrapper .tabbar-wrapper,
+.tabbar-wrapper,
 #tabs-container.left,
 #tabs-subcontainer.left,
 #tabs-container.right,
@@ -22,7 +22,7 @@
     border-radius: var(--radius);
 }
 
-.tabbar-wrapper .tabbar-wrapper:hover,
+.tabbar-wrapper:hover,
 #tabs-container.left:hover,
 #tabs-subcontainer.left:hover,
 #tabs-container.right:hover,
@@ -409,7 +409,7 @@ div#main.right #panels-container {
 
 #browser:not(.fullscreen) #webpage-stack {
     border-radius: var(--radius);
-    margin: 0 1px 4px 50px;
+    margin: 0 2px 4px 50px;
 }
 
 /* SPEED DIAL */
@@ -854,3 +854,4 @@ button.button-startpage.add-set:hover svg path {
 .isblurred .webpageview.tiled.active {
     box-shadow: 0 0 0 2px var(--colorHighlightBg); /* CHANGING COLOR OF BORDER OF ACTIVE WHEN BROWSER ISNT FOCUSED */
 }
+
