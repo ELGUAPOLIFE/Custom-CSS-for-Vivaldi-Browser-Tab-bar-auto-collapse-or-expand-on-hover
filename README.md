@@ -1,4 +1,4 @@
-# Custom CSS for Vivaldi Browser Tab bar auto collapse or expand on hover plus Air Theme
+# Custom CSS for Vivaldi Browser Left Tab bar auto collapse or expand on hover + Glass Effect
 1. Open Vivaldi Browser
 2. Type vivaldi:experiments on address bar and hit enter
 3. Tick Allow CSS modifications
