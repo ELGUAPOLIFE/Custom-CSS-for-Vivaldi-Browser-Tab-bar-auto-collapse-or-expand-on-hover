@@ -358,7 +358,19 @@ Suggestions?
     margin: 0 5px;
 }
 
-/* SIDEBAR */
+/* STATUS BAR */
+
+#footer {
+  margin: 4px;
+  border-radius: var(--radius);
+  background: var(--overlayColor) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin-top: 0px;
+  height: 35px;
+}
+
+/* SIDE PANEL */
 
 #switch { padding-top: 5px; }
 
