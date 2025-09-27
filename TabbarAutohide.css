@@ -1,340 +1,98 @@
-/* Collapsing vertical tabs that expand on hover */
+/* Vivaldi Air v.22
+TODO: Suggestions?
+Fix sorting in panels
+Fix checkboxes
+Do translate menu
+*/
 
 :root {
-    --lessTransparent: rgba(0,0,0,0.4); /* fallback */
     --customRadius: 8px; /* NOT USING NOW */
 
-    /* New adaptive overlay system */
-    --overlayDark: rgba(0, 0, 0, 0.4);
-    --overlayLight: rgba(255, 255, 255, 0.4);
+    --bgDark: rgba(0, 0, 0, 0.4);
+    --bgLight: rgba(255, 255, 255, 0.4);
+    
+    --bgDisabledDark: rgba(0, 0, 0, 0.2);
+    --bgDisabledLight: rgba(255, 255, 255, 0.2);
+
+    --blurLow: blur(4px);
+    --blurMed: blur(6px);
+    --blurMedHigh: blur(8px);
+    --blurHigh: blur(12px);
+
+    --hoverBlur: var(--blurMed);
+
+    --anim-duration: 128ms;
+
+    --space: 5px;
+
 }
 
 /* set theme-aware overlay */
 .theme-dark {
-    --overlayColor: var(--overlayDark);
+    --bg: var(--bgDark);
+    --bgDisabled: var(--bgDisabledDark);
 }
 .theme-light {
-    --overlayColor: var(--overlayLight);
+    --bg: var(--bgLight);
+    --bgDisabled: var(--bgDisabledLight);
 }
-
-.tabbar-wrapper,
-#tabs-container.left,
-#tabs-subcontainer.left,
-#tabs-container.right,
-#tabs-subcontainer.right,
-.button-toolbar.workspace-popup.tabbar-workspace-button {
-    min-width: 40px;
-    transition: min-width 200ms ease-in-out !important; /* Smooth expand/collapse */
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: var(--radius);
-}
-
-.tabbar-wrapper:hover,
-#tabs-container.left:hover,
-#tabs-subcontainer.left:hover,
-#tabs-container.right:hover,
-#tabs-subcontainer.right:hover,
-.button-toolbar.workspace-popup.tabbar-workspace-button:hover {
-    min-width: 180px !important;
-    transition: min-width 200ms ease-in-out !important;
-    transition-delay: 150ms !important; /* Slight delay for better feel */
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: var(--radius);
-}
-
-.button-toolbar.workspace-popup.tabbar-workspace-button:hover:has(+ #tabs-tabbar-container > #tabs-subcontainer) {
-    min-width: 180px !important;
-    transition: min-width 200ms ease-in-out !important;
-    transition-delay: 150ms !important;
-}
-
-.tabbar-wrapper .tabbar-wrapper:hover:has(#tabs-tabbar-container > #tabs-subcontainer) {
-    width: 180px !important;
-    transition: min-width 200ms ease-in-out !important;
-    transition-delay: 300ms !important; /* Smoother timing */
-}
-
-.button-toolbar.workspace-popup.tabbar-workspace-button > button {
-    justify-content: left !important;
-}
-
-#browser:not(.alt-tabs) .tab-position .tab:hover.tab-small:not(.tab-mini).active .title,
-#browser:not(.alt-tabs) .tab-position .tab.force-hover.tab-small:not(.tab-mini).active .title {
-    display: flex !important;
-}
-
-.tabbar-workspace-button {
-    width: 100% !important;
-}
-
-#tabs-tabbar-container.left,
-#tabs-tabbar-container.right {
-    width: auto !important;
-    min-width: 32px;
-}
-
-.toolbar-tabbar.sync-and-trash-container {
-    flex-direction: column;
-}
-
-/* tabs list gets the scrollable middle */
-#tabs-tabbar-container:is(.left, .right) #tabs-subcontainer {
-    display: flex;
-    flex-direction: column;
-}
-
-#tabs-tabbar-container:is(.left, .right) #tabs-subcontainer .tabbar-wrapper {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow: auto;
-}
-
-/* leftside 1st button */
-.toolbar-mainbar > div:first-child > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-    transform: translate(3px, 29px);
-}
-
-.toolbar-mainbar > div:first-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-    transform: translate(24px, 18.5px);
-}
-
-/* rightside button */
-.toolbar-mainbar > div:nth-last-child(4) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-    transform: translate(-10px, 29px);
-}
-
-.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-    transform: translate(-44px, 29px);
-}
-
-.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls input[type=range]::after {
-    left: 40%;
-}
-
-.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-    transform: translate(-24px, 18.5px);
-}
-
-.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-    transform: translate(-78px, 29px);
-}
-
-.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls input[type=range]::after {
-    left: 64%;
-}
-
-.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-    transform: translate(-58px, 18.5px);
-}
-
-.toolbar-mainbar > div:last-child > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-    transform: translate(-112px, 29px);
-}
-
-.toolbar-mainbar > div:last-child > .page-zoom-controls input[type=range]::after {
-    left: 88%;
-}
-
-.toolbar-mainbar > div:last-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-    transform: translate(-92px, 18.5px);
-}
-
-/** Make the expanded tabbar float on the webpage. Use with tab-expansion mod. **/
-#main > .inner > div:has(#tabs-tabbar-container:is(.left, .right)) {
-    position: absolute;
-    z-index: 2;
-    opacity: 1;
-    background-color: var(--colorBg);
-    height: 100% !important;
-}
-
-#browser.transparent-tabbar .inner > div:has(#tabs-tabbar-container:is(.left, .right)) {
-    background-color: var(--colorImageFgHeaviest);
-}
-
-.inner #webpage-stack {
-    margin-left: 40px;
-}
-
-.inner:has(#tabs-subcontainer:is(.left, .right)) #webpage-stack {
-    margin-left: 80px;
-}
-
-.fullscreen #webpage-stack {
-    margin-left: 0px;
-}
-
-.theme-dark .tab-position .tab.active .tab-header .favicon {
-    filter: none !important;
-}
-
-/* Fixing favicon */
-.tab-header {
-    padding-left: 7.4px !important;
-}
-
-/* Show audio/speaker icon only on tab hover */
-span.tab-audio {
-    opacity: 0;
-    transition: opacity 0.25s ease-in-out;
-}
-
-#tabs-tabbar-container:hover span.tab-audio,
-#tabs-subcontainer:hover span.tab-audio {
-    opacity: 1;
-}
-
-/* Smooth slide + slight fade for tabbar */
-#tabs-tabbar-container.left,
-#tabs-tabbar-container.right {
-    opacity: 0.95;
-    transition: opacity 200ms ease-in-out, min-width 200ms ease-in-out !important;
-}
-
-#tabs-tabbar-container.left:hover,
-#tabs-tabbar-container.right:hover {
-    opacity: 1;
-}
-
-/* Collapse state force reset for workspace (smooth) */
-#tabs-tabbar-container.left:not(:hover),
-#tabs-tabbar-container.right:not(:hover),
-#tabs-subcontainer.left:not(:hover),
-#tabs-subcontainer.right:not(:hover) {
-    min-width: 40px !important;
-    width: 40px !important;
-    transition: min-width 200ms ease-in-out !important;
-}
-
-/* Workspace button in collapsed state: icon only */
-.button-toolbar.workspace-popup.tabbar-workspace-button {
-    min-width: 35px !important;
-    max-width: 55px !important;
-    overflow: hidden !important;
-}
-
-/* adjust this to move more/less (positive = more to the right for left panel) */
-:root { --workspace-offset: 0px; }
-
-/* collapsed — left panel: move button to the right */
-#tabs-tabbar-container.left:not(:hover) .button-toolbar.workspace-popup.tabbar-workspace-button,
-#tabs-subcontainer.left:not(:hover) .button-toolbar.workspace-popup.tabbar-workspace-button {
-    transform: translateX(var(--workspace-offset)) !important;
-    transition: transform 180ms ease-in-out !important;
-}
-
-/* collapsed — right panel: move button inward (use negative) */
-#tabs-tabbar-container.right:not(:hover) .button-toolbar.workspace-popup.tabbar-workspace-button,
-#tabs-subcontainer.right:not(:hover) .button-toolbar.workspace-popup.tabbar-workspace-button {
-    transform: translateX(calc(-1 * var(--workspace-offset))) !important;
-    transition: transform 180ms ease-in-out !important;
-}
-
-/* when expanded/hovered, reset transform */
-#tabs-tabbar-container.left:hover .button-toolbar.workspace-popup.tabbar-workspace-button,
-#tabs-tabbar-container.right:hover .button-toolbar.workspace-popup.tabbar-workspace-button,
-#tabs-subcontainer.left:hover .button-toolbar.workspace-popup.tabbar-workspace-button,
-#tabs-subcontainer.right:hover .button-toolbar.workspace-popup.tabbar-workspace-button {
-    transform: none !important;
-}
-
-/* ==== Dynamic Effects for Vivaldi (Neon Theme) ==== */
-
-/* Smooth transitions for all tabs */
-.tab {
-    transition:
-        background 0.4s ease,
-        transform 0.2s ease,
-        box-shadow 0.4s ease;
-}
-
-/* Glow & scale on hover (inactive tabs only) */
-.tab:not(.active):hover {
-    background-color: rgba(0, 255, 200, 0.08) !important;
-    transform: scale(1.04);
-    box-shadow: 0 0 12px rgba(0, 255, 200, 0.9);
-}
-
-/* Active tab with animated neon gradient */
-@keyframes activeTabGradient {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
-}
-
-.tab.active {
-    background: linear-gradient(270deg, #00fff7, #ff00f7);
-    background-size: 200% 200%;
-    animation: activeTabGradient 3s linear infinite;
-    color: white !important;
-    text-shadow: 0 0 6px #00fff7, 0 0 10px #ff00f7;
-    box-shadow: 0 0 15px rgba(255, 0, 247, 0.9), 0 0 25px rgba(0, 255, 247, 0.7);
-}
-
-/* Click bounce effect */
-.tab:active {
-    transform: scale(0.95);
-    transition: transform 0.1s ease;
-}
-
-/* Slight lift when hovering over buttons */
-.button-toolbar:hover {
-    transform: translateY(-1px);
-    transition: transform 0.2s ease;
-}
-
-/* Neon glow on button hover */
-.button-toolbar:hover .button-icon {
-    filter: drop-shadow(0 0 6px #00fff7) drop-shadow(0 0 10px #ff00f7);
-}
-
-/* TODO
-Suggestions?
-*/
 
 /* MAINBAR */
 
 #browser.win.address-top .toolbar-mainbar:has(.window-buttongroup.on-mainbar),
 #browser.linux.address-top .toolbar-mainbar:has(.window-buttongroup.on-mainbar) {
-    min-height: calc(40px / var(--uiZoomLevel));
+    min-height: calc(38px / var(--uiZoomLevel));
 }
-
-.density-on .UrlBar-SearchField,
+/*
+.density-on .UrlBar-SearchField, 
 .density-on .UrlBar-AddressField {
-    height: 30px;
+    height: 32px;
 }
-
+*/
 .disable-titlebar#browser.win .window-buttongroup {
-    height: 40px;
+    height: 38px;
 }
-
 
 #browser.win .window-buttongroup button.window-close {
     border-top-right-radius: var(--radius);
-    border-bottom-right-radius: var(--radius);
+    border-bottom-right-radius: var(--radius); 
 }
 
 .mainbar {
-    background-color: var(--overlayColor);
+    background-color: var(--bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    margin: 4px;
+    margin: 4px;               
     border-radius: var(--radius);
 }
 
-.SearchField,
-.UrlBar-AddressField {
+.address-top .mainbar { border-bottom: none; }
+
+.mainbar button:hover,
+#browser:not(.tabs-top) .vivaldi:hover, 
+#browser:not(.tabs-top) .vivaldi:focus-visible,
+.theme-dark#browser.win .window-buttongroup button:hover {
+    background-color: var(--bg);
+    backdrop-filter: var(--blurMed);
+}
+
+.disable-titlebar.address-top#browser:not(.tabs-top) .vivaldi {
+    margin: 0 4px;
+}
+
+
+/* Search bar & address bar */
+
+.SearchField, .UrlBar-AddressField {
     border: none !important;
     background-color: transparent;
 }
 
-.SearchField:hover,
-.UrlBar-AddressField:hover,
-.color-behind-tabs-on .SearchField:focus-within,
-.color-behind-tabs-on .MailSearchField-Inner:focus-within,
+.SearchField:hover, .UrlBar-AddressField:hover,
+.color-behind-tabs-on .SearchField:focus-within, 
+.color-behind-tabs-on .MailSearchField-Inner:focus-within, 
 .color-behind-tabs-on .UrlBar-AddressField:focus-within {
-    background-color: var(--overlayColor);
+    background-color: var(--bg);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
@@ -344,89 +102,350 @@ Suggestions?
     --LowlightColor: var(--colorFg);
 }
 
-.address-top .mainbar { border-bottom: none; }
+/* SIDEBAR */
 
-.mainbar button:hover,
-#browser:not(.tabs-top) .vivaldi:hover,
-#browser:not(.tabs-top) .vivaldi:focus-visible,
-.theme-dark#browser.win .window-buttongroup button:hover {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(6px);
+#panels-container {
+    margin-bottom: 4px;
+    background-color: var(--bg);
+    border-radius: var(--radius);
+    min-width: 40px;
+    position: relative;
+    transition: 
+        width var(--anim-duration), 
+        margin-left var(--anim-duration) ease-out, 
+        min-width var(--anim-duration) !important;
 }
 
-.disable-titlebar.address-top#browser:not(.tabs-top) .vivaldi {
-    margin: 0 5px;
-}
-
-/* STATUS BAR */
-
-#footer {
-  margin: 4px;
-  border-radius: var(--radius);
-  background: var(--overlayColor) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  margin-top: 0px;
-  height: 35px;
-}
-
-/* SIDE PANEL */
-
-#switch { padding-top: 5px; }
-
-div#main.right #panels-container {
-    padding-bottom: 5px;
-}
-
-.density-on #switch {
-    background-color: var(--overlayColor);
+/* Create backdrop blur with pseudo-element */
+#panels-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: var(--radius);
-    padding-bottom: 4px;
-    padding-right: 4px;
-    padding-left: 0px;
+    pointer-events: none;
+    z-index: -1;
 }
 
-#panels-container { background-color: transparent; margin-right: 4px; }
+#panels-container.overlay:not(.icons) .panel-group {
+    background-color: var(--bg) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-radius: var(--radius);
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+#panels-container.left { margin-left: 4px; }  
+#panels-container.right { margin-right: 4px; }  
+
+#panels-container #switch { padding-bottom: 5px; min-width: 41px; }
+
+
+
+#panels-container.switcher {
+    width: 0;
+    min-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+    overflow: hidden;
+}
+
+/* doesnt disappear on collapse transition */
+#panels-container.switcher #switch {
+    visibility: none !important; 
+}
+
+#panels {
+    padding-bottom: 5px;
+}
 
 #panels .webpanel-stack .webpanel .webpanel-content {
-    margin-right: 7px;
-    border-bottom-right-radius: var(--radius);
-    border-top-right-radius: var(--radius);
+    margin: 4px;
+    margin-bottom: 0;
+    border-radius: var(--radius);
 }
 
-#panels-container.right:not(.icons) .panel-group,
-#panels-container.right.icons:not(:has(.SlideBar)) { border-left: none; }
+#panels .webpanel-stack .webpanel .webpanel-header {
+    box-shadow: none !important;
+    padding-bottom: 0;
+}
+
+/* basic components */
+#panels input,
+#panels label:not(div.tree-row > label):not(.disabled),
+#panels textarea {
+    background-color: var(--bg);
+    border-radius: var(--radius);
+    border: none;
+    box-shadow: none;
+}
+
+#panels .sortselector {
+    border: none !important;
+    background-color: var(--bg);
+}
+
+#panels .sortselector-button {
+    background-color: none !important;
+    height: calc(var(--treeViewRowHeight) - 2px);
+}
+
+#panels #window-panel .vivaldi-tree .tree-row {
+    background-color: var(--bg) !important;
+}
+
+.panel-group .button-toolbar > button {
+    background-color: var(--bg) !important;
+    background-image: none !important;
+    border: none !important;
+}
+.panel-group .button-toolbar > button:disabled {
+    background-color: var(--bgDisabled) !important;
+}
+
+/* New note textbox */
+.NotesEditor-Editor-Background:after { visibility: hidden; }
+.NotesEditor-EmptyPlaceholder:hover {
+    background-color: var(--bg);
+    outline: none;
+    border-radius: var(--radius);
+}
 
 #panels-container.overlay .panel-group,
 .ExtensionToggleIcon.ExtensionToggleIcon--Expanded,
 .ExtensionIcon--Hidden { background-color: transparent; }
 
 #panels-container button:hover,
-.ExtensionIcon--Hidden:hover,
+.ExtensionIcon--Hidden:hover, 
 .ExtensionIcon--Hidden:active,
-.toolbar-panel > .button-toolbar > button.button-pressed,
-.toolbar-panel .toolbar-extensions .button-toolbar > button.button-pressed,
+.toolbar-panel > .button-toolbar > button.button-pressed, 
+.toolbar-panel .toolbar-extensions .button-toolbar > button.button-pressed, 
 .toolbar-panel .page-zoom-controls .button-toolbar > button.button-pressed,
-.density-on #switch .addwebpanel-wrapper > button.active button,
-.density-on #switch > .button-toolbar.active button,
-.density-on #switch > * > .button-toolbar.active button,
+.density-on #switch .addwebpanel-wrapper > button.active button, 
+.density-on #switch > .button-toolbar.active button, 
+.density-on #switch > * > .button-toolbar.active button, 
 .density-on #switch > button.active button {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(6px);
+    background-color: var(--bg);
+    backdrop-filter: var(--blurMed);
+}
+
+/* STATUS BAR */
+footer#footer {
+    background: none !important;
+    border-top: none !important;
+}
+
+footer .toolbar-statusbar {
+    background-color: var(--bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: var(--bg);
+    border-radius: var(--radius);
+    margin: 0 4px 4px 4px;
+}
+
+.inner > .StatusInfo > .StatusInfo-Content {
+    background-color: var(--bg) !important;
+    backdrop-filter: var(--blurLow) !important;
+    -webkit-backdrop-filter: var(--blurLow) !important;
+    border-radius: var(--radius) !important;
+    padding-bottom: 5px !important;
+    background-color: var(--bg);
+    margin: 0 0 4px 6px !important;
+    border: none !important;
+}
+
+/* ====================== */
+/* UNIVERSAL WORKSPACES   */
+/* ====================== */
+
+/* Workspace buttons on tabbar (all positions) */
+#tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar,
+#tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar {
+    color: var(--colorFg) !important;
+    background: transparent !important;
+}
+
+/* Hover / active workspace button */
+#tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar > button:active,
+#tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar > button:active,
+#tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover,
+#tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover {
+    background-color: var(--bg) !important;
+    backdrop-filter: var(--blurMed) !important;
+    -webkit-backdrop-filter: var(--blurMed) !important;
+    border-radius: var(--radius);
+}
+
+/* Workspace popup container */
+.button-popup.WorkspacePopup {
+    background-color: var(--bg) !important;
+    backdrop-filter: var(--blurHigh) !important;
+    -webkit-backdrop-filter: var(--blurHigh) !important;
+    border-radius: var(--radius);
+    width: 194px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Workspace list items */
+.WorkspacePopup-Items .workspace-item-wrapper,
+.WorkspacePopup-Items .this-window {
+    background-color: transparent !important;
+    border-radius: var(--radius);
+    margin-bottom: 3px;
+    transition: background-color var(--anim-duration) ease;
+}
+
+/* Hover effect */
+.WorkspacePopup-Items .workspace-item-wrapper:hover,
+.WorkspacePopup-Items .this-window:hover {
+    background-color: var(--bg) !important;
+    backdrop-filter: var(--blurLow) !important;
+    -webkit-backdrop-filter: var(--blurLow) !important;
+}
+
+/* Tab counter */
+.WorkspacePopup-Items .workspace-item-wrapper .title .tab-count,
+.WorkspacePopup-Items .this-window .title .tab-count {
+    color: var(--colorFg) !important;
+    font-weight: 500;
+}
+
+/* Popup padding adjustments */
+.WorkspacePopup-Items { padding: 5px 5px 0 !important; }
+.WorkspacePopup .actions { padding: 0px 5px 5px !important; }
+.WorkspacePopup-Items hr { margin: 5px 0 1px !important; }
+
+/* Remove default arrow from popup */
+.button-popup-right.button-popup-arrow-dark:before,
+.button-popup-arrow-light:before { border-bottom-color: transparent !important; }
+
+/* Page tiling popup (consistent style) */
+.button-popup.ToolbarButtonPopup-DefaultStyles {
+    background-color: var(--bg) !important;
+    backdrop-filter: var(--blurMed) !important;
+    -webkit-backdrop-filter: var(--blurMed) !important;
+    border-radius: var(--radius);
+}
+.button-popup.ToolbarButtonPopup-DefaultStyles h2 {
+    background: transparent !important;
+    border-bottom: none !important;
+}
+
+
+/* TABS */
+
+
+
+#browser .tabbar-wrapper, #browser.tabs-top #header { 
+    background-color: transparent; 
+}
+
+#browser:not(.transparent-tabbar) #tabs-tabbar-container {
+    background-color: var(--bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    margin: 4px 4px 0 4px;
+    border-radius: var(--radius);
+    height: 30px;
+}
+
+#titlebar {
+    position: absolute;
+    width: 100%;
+    left: 4px;
+    top: 4px;
+    right: 0px;
+    pointer-events: none;
+}
+
+#browser.win .window-buttongroup {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    overflow: hidden;
+    line-height: initial;
+}
+
+
+
+#browser.color-behind-tabs-on .tab.active.active,
+#browser .tab-position.colored .tab.active,
+#browser .tab-position.colored .tab:not(.active),
+#browser .tab-position.colored.accordion-toggle-arrow {
+    background-color: var(--bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* hover states */
+#tabs-container .tab:not(.tab-group,.tab.active):hover,
+#browser .tab-position.colored.accordion-toggle-arrow:hover, 
+#browser .tab-position.colored .tab:not(.active):hover {
+    background-color: var(--bg);
+    backdrop-filter:  var(--blurMed);
+}
+
+.tab.active .favicon { filter: none !important; }
+
+#browser .tab-position.colored .stack-counter {
+    background-color: var(--colorHighlightBg);
 }
 
 /* INNER ROUND BORDERS */
 
 #browser:not(.fullscreen) #webpage-stack {
+    margin: 0 4px 4px 4px;
     border-radius: var(--radius);
-    margin: 0 2px 4px 50px;
+    /*
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: var(--bg);
+    */                                      /*Use this for blurred webpage background*/
+    /*
+    box-shadow: inset 0 0 12px 0 rgba(0, 0, 0, 0.16);
+    */                                        /*Use this for shadow on the webpage*/
 }
+
+/* Remove all background images */
+
+/*
+#main, 
+.startpage,
+.startpage-content,
+.webpage,
+#browser {
+    background-image: none !important;
+    background-color: transparent !important;
+}
+*/
+
+/* ======================= */
+/* Fullscreen gap killer   */
+/* ======================= */
+#browser.fullscreen,
+#browser.fullscreen body,
+#browser.fullscreen #header,
+#browser.fullscreen #titlebar,
+#browser.fullscreen #tabs-container,
+#browser.fullscreen #tabs-tabbar-container,
+#browser.fullscreen .mainbar,
+#browser.fullscreen .bookmark-bar,
+#browser.fullscreen #webpage-stack {
+    margin: 0 !important;
+    padding: 0 !important;
+    top: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    border: none !important;
+}
+
 
 /* SPEED DIAL */
 .SpeedDial--Thumbnail {
-    background-color: var(--overlayColor);
+    background-color: var(--bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: none;
@@ -434,14 +453,23 @@ div#main.right #panels-container {
 
 /* CTRL+F */
 .find-in-page-wrapper {
-    background-color: var(--overlayColor);
+    background-color: var(--bg);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 
+/* Transparent active tab background */
+.tab.active {
+    background-color: var(--bg) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background-color 0.2s ease;
+}
+.tab.active::after { background: transparent !important; }
+
 /* BOOKMARK BAR */
 .bookmark-bar {
-    background-color: var(--overlayColor) !important;
+    background-color: var(--bg) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
     border-radius: var(--radius);
@@ -479,7 +507,7 @@ div#main.right #panels-container {
 .bookmark-bar .button-toolbar > button:hover,
 .bookmark-bar .bookmark-item:hover,
 .bookmark-bar .bookmarkbar-item:hover {
-    background-color: var(--overlayColor) !important;
+    background-color: var(--bg) !important;
     backdrop-filter: blur(calc(var(--blurStrength) * 0.5));
     -webkit-backdrop-filter: blur(calc(var(--blurStrength) * 0.5));
 }
@@ -489,7 +517,7 @@ div#main.right #panels-container {
 .bookmark-bar .bookmark-item:active,
 .bookmark-bar .bookmarkbar-item:active,
 .bookmark-bar .button-toolbar > button[aria-pressed="true"] {
-    background-color: var(--overlayColor) !important;
+    background-color: var(--bg) !important;
     backdrop-filter: blur(calc(var(--blurStrength) * 0.7));
     -webkit-backdrop-filter: blur(calc(var(--blurStrength) * 0.7));
 }
@@ -508,9 +536,9 @@ div#main.right #panels-container {
 .StartPage .SearchField:not(:hover):not(:focus-within),
 .SpeedDial .SearchField:not(:hover):not(:focus-within),
 .SpeedDialView .SearchField:not(:hover):not(:focus-within) {
-    background-color: var(--overlayColor) !important;
-    backdrop-filter: blur(6px) !important;
-    -webkit-backdrop-filter: blur(6px) !important;
+    background-color: var(--bg) !important;
+    backdrop-filter: var(--blurMed) !important;
+    -webkit-backdrop-filter: var(--blurMed) !important;
     border-radius: var(--radius) !important;
     box-shadow: none !important;
     transition: background-color 0.18s ease, backdrop-filter 0.18s ease;
@@ -525,7 +553,7 @@ div#main.right #panels-container {
 .SpeedDial .SearchField:focus-within,
 .SpeedDialView .SearchField:hover,
 .SpeedDialView .SearchField:focus-within {
-    background-color: var(--overlayColor) !important;
+    background-color: var(--bg) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
     border-radius: var(--radius) !important; /* keep corners consistent */
@@ -540,53 +568,59 @@ div#main.right #panels-container {
     color: inherit !important;
     border-radius: var(--radius) !important;
 }
-
 .mainbar,
 .bookmark-bar {
     z-index: 10; /* keep reasonable */
 }
 
-/* == Startpage Navigation Mod integrated with Vivaldi theme - Adjusted Padding == */
+/* ========================================================= */
+/* STARTPAGE NAVIGATION - THEME AWARE BLUR & BUTTON STYLING */
+/* ========================================================= */
 
-/* Config variables for Startpage Navigation Mod */
+/* Config variables */
 :root {
     --startpageNavBtnPrimary: var(--colorFg);
-    --startpageNavBtnSecondary: var(--colorHighlightBg);
-    --startpageNavBtnInactive: var(--overlayColor);
+    --startpageNavBtnSecondary: var(--colorFg);
+    --startpageNavBtnInactive: transparent;
     --startpageNavBtnRounding: 14px;
     --startpageNavBtnHeight: 23px;
     --startpageNavBtnMargin: 10px;
-    --startpageNavBackground: var(--overlayColor);
-    --startpageNavPaddingOnTop: 10px;      /* decreased padding */
-    --startpageNavPaddingOnBottom: 10px;   /* decreased padding */
-    --startpageNavTextShadow: none;
-    --startpageNavIconShadow: drop-shadow(0 0 2px var(--startpageNavBtnSecondary));
+    --startpageNavPaddingOnTop: 10px;       /* Vertical spacing */
+    --startpageNavPaddingOnBottom: 10px;    /* Vertical spacing */
+    --startpageNavTextShadow: 0 0 2px var(--startpageNavBtnSecondary), 0 0 3px var(--startpageNavBtnSecondary), 0 0 5px var(--startpageNavBtnSecondary);
+    --startpageNavIconShadow: drop-shadow(0 0 4px var(--startpageNavBtnSecondary));
+
+    /* Adaptive blur strength */
+    --startpageNavBlur: 6px;        /* default blur for nav bar */
+    --startpageNavBlurStrong: 12px; /* blur for active/hover buttons */
 }
 
-/* Startpage Nav Bar background and spacing */
+/* Startpage Nav Bar container */
 .startpage .startpage-navigation {
-    background-color: var(--startpageNavBackground);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: var(--bg);
+    backdrop-filter: blur(var(--startpageNavBlur));
+    -webkit-backdrop-filter: blur(var(--startpageNavBlur));
+    box-shadow: unset;
     padding-top: var(--startpageNavPaddingOnTop);
     padding-bottom: calc(var(--startpageNavPaddingOnBottom) - 2px);
     min-height: unset;
-    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    border-radius: var(--customRadius);
 }
 
-/* Remove background from folder nav buttons */
+/* Folder nav buttons background */
 .startpage .startpage-folder-navigation button {
-    background-color: var(--startpageNavBtnInactive);
+    background-color: unset;
 }
 
-/* Format buttons for Startpage Nav Bar */
+/* Startpage Nav Bar buttons */
 .startpage .startpage-navigation .button-startpage,
 .startpage .startpage-folder-navigation .button-startpage {
     display: flex;
     align-items: center;
     justify-content: center;
     height: var(--startpageNavBtnHeight);
-    min-height: unset;
     border-radius: var(--startpageNavBtnRounding) !important;
     border: 1.2px solid var(--startpageNavBtnPrimary);
     background-color: var(--startpageNavBtnInactive);
@@ -594,38 +628,32 @@ div#main.right #panels-container {
     margin: 0 var(--startpageNavBtnMargin) !important;
     text-shadow: var(--startpageNavTextShadow);
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-    transition: 0.1s;
+    transition: 0.2s ease;
     font-size: 11px;
     font-weight: 500;
-    -webkit-mask-image: unset;
 }
 
-/* Hover or active state for buttons */
+/* Hover / active states with stronger blur */
 .startpage .startpage-navigation .button-startpage.active,
 .startpage .startpage-navigation .button-startpage:hover,
 .startpage .startpage-folder-navigation .button-startpage:hover {
     color: var(--startpageNavBtnSecondary);
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    text-shadow: none;
+    background-color: var(--startpageNavBtnPrimary);
+    text-shadow: 0 0 0.5px var(--startpageNavBtnSecondary);
+    backdrop-filter: blur(var(--startpageNavBlurStrong));
+    -webkit-backdrop-filter: blur(var(--startpageNavBlurStrong));
 }
 
-/* Format icons for Startpage Nav Bar buttons */
+/* Icons styling */
 .startpage .startpage-navigation .button-startpage svg,
 .startpage .startpage-folder-navigation .button-startpage svg {
     color: var(--startpageNavBtnPrimary);
     filter: var(--startpageNavIconShadow);
-    height: 2.1em;
     width: auto;
+    height: 2.1em;
 }
 
-.startpage .startpage-navigation .button-startpage.add-set svg {
-    margin: 0;
-    height: 16px; /* fix alignment */
-}
-
-/* Hover/active icons */
+/* Hover / active icons */
 .startpage .startpage-navigation .button-startpage.active svg,
 .startpage .startpage-navigation .button-startpage:hover svg,
 .startpage .startpage-folder-navigation .button-startpage:hover svg {
@@ -633,211 +661,282 @@ div#main.right #panels-container {
     filter: unset;
 }
 
-/* Speed dial folder back button fixes */
+/* Folder back button adjustments */
 button.button-startpage.up-level svg {
     position: unset;
     margin: 0 4px;
 }
+button.button-startpage.up-level span { display: flex; }
+.button-startpage.up-level { padding: 0 14px 0 6px; }
 
-button.button-startpage.up-level span {
-    display: flex;
-}
-
-.button-startpage.up-level {
-    padding: 0 14px 0 6px;
-}
-
-/* Center the speed dial folder back button */
+/* Center folder navigation */
 .startpage .startpage-folder-navigation {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Remove border between navigation groups */
-.startpage .startpage-navigation .startpage-navigation-group:last-of-type {
-    border: unset;
+/* Startpage widgets */
+.Dashboard-Widgets .dashboard-widget {
+    background-color: var(--bg);
+    backdrop-filter: blur(12px) !important;
 }
 
-/* Remove color gradient after buttons */
-button.button-startpage:after {
-    content: unset;
-}
+/* Remove borders & extra styling */
+.startpage .startpage-navigation .startpage-navigation-group:last-of-type { border: unset; }
+button.button-startpage:after { content: unset; }
 
-/* Make new speed dial folder add button smaller */
+/* ========================================================= */
+/* ADD / PLUS BUTTON FIXES */
+/* ========================================================= */
 .startpage .startpage-navigation .button-startpage.add-set {
-    padding-left: 1px;
-    padding-right: 1px;
-    min-width: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;                  /* remove extra padding */
+    min-width: 27px;                         /* small width */
+    height: var(--startpageNavBtnHeight);    /* match other buttons */
+    border-radius: var(--startpageNavBtnRounding) !important;
+    background-color: var(--startpageNavBtnInactive);
+    border: 1.2px solid var(--startpageNavBtnPrimary);
+    margin: 0 var(--startpageNavBtnMargin) !important;
+    text-shadow: var(--startpageNavTextShadow);
+    box-shadow: 0 0 2px 1px rgba(0,0,0,0.2);
+    transition: 0.2s ease;
 }
 
-/* Fill the new speed dial add button icon correctly */
-button.button-startpage.add-set svg path {
-    fill: var(--startpageNavBtnPrimary);
+/* Center the SVG inside the add button */
+.startpage .startpage-navigation .button-startpage.add-set svg {
+    height: 16px;
+    width: 16px;
+    margin: 0;
+    display: block;
 }
 
-button.button-startpage.add-set:hover svg path {
+/* Hover / active for add button */
+.startpage .startpage-navigation .button-startpage.add-set:hover,
+.startpage .startpage-navigation .button-startpage.add-set.active {
+    background-color: var(--startpageNavBtnPrimary);
+    color: var(--startpageNavBtnSecondary);
+    backdrop-filter: blur(var(--startpageNavBlurStrong));
+    -webkit-backdrop-filter: blur(var(--startpageNavBlurStrong));
+}
+
+.startpage .startpage-navigation .button-startpage.add-set:hover svg path,
+.startpage .startpage-navigation .button-startpage.add-set.active svg path {
     fill: var(--startpageNavBtnSecondary);
 }
 
-/* Remove gap from top of speed dial items */
-.speeddial {
-    margin-top: 0;
-    padding-top: 2px;
+/* Add folder button tweaks (keep min width for alignment) */
+.startpage .startpage-navigation .button-startpage.add-set {
+    padding-left: 1px;
+    padding-right: 1px;
 }
 
-/* Fix search-enabled spacing */
-.sdwrapper .iconmenu-container.searchfield {
-    margin: 0px auto 25px;
-}
+/* Speed dial items spacing fix */
+.speeddial { margin-top: 0; padding-top: 2px; }
 
-/* Adjust notes navigation icon size */
-.startpage .startpage-navigation .button-startpage[data-id="notes"] svg {
-    transform: scale(1.45);
-}
+/* Search bar spacing fix */
+.sdwrapper .iconmenu-container.searchfield { margin: 0px auto 25px; }
 
-/* TABS */
+/* Notes icon scale */
+.startpage .startpage-navigation .button-startpage[data-id="notes"] svg { transform: scale(1.45); }
 
-#browser .tabbar-wrapper,
-#browser.tabs-top #header {
-    background-color: var(--overlayColor); /* BG COLOR OF TAB BAR PART 1 */
-    margin-left: 2px;
+/* ========================================================= */
+/* END STARTPAGE NAVIGATION */
+/* ========================================================= */
+
+/* =========================
+   TWO-LEVEL TAB STACK: SUB-ROW
+   ========================= */
+
+/* Cover multiple builds/selectors for the sub strip */
+#tabs-subcontainer,                                           /* common ID for sub-row */
+#tabs-tabbar-container [aria-label="Tab Stack Toolbar"],      /* ARIA label on newer builds */
+#tabs-tabbar-container .tabbar-wrapper + .tabbar-wrapper,     /* sub-row is injected as next wrapper */
+#tabs-tabbar-container .tabbar-wrapper:has(.tab.is-sub),      /* fallback via :has */
+#tabs-tabbar-container .tabbar-subcontainer {                 /* some snapshots used this class */
+    background: var(--bg) !important;
+    background-image: none !important;       /* defeat Colored Tab Stacks paint */
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
     border-radius: var(--radius);
-    margin-bottom: 4px;
+    margin: 3px 5px 3px 5px;                    /* matches outer tab bar rounding */
 }
 
-#browser:not(.transparent-tabbar) #tabs-tabbar-container {
-    background-color: color-mix(in srgb, var(--colorBg), var(--lessTransparent)); /* BG COLOR OF TAB BAR PART 2 */
-    margin-left: 0px;
-    border-radius: var(--radius);
+/* Make tabs inside the sub-row look like normal tabs */
+#tabs-subcontainer .tab,
+#tabs-tabbar-container [aria-label="Tab Stack Toolbar"] .tab,
+#tabs-tabbar-container .tabbar-wrapper + .tabbar-wrapper .tab,
+#tabs-tabbar-container .tabbar-subcontainer .tab {
+    background: transparent !important;      /* let row’s blur show through */
 }
 
-#browser:not(.transparent-tabbar) .tabbar-wrapper {
-    background-color: color-mix(in srgb, var(--colorBg), var(--lessTransparent)); /* BG COLOR OF TAB BAR PART 2 */
-    margin-left: 2px;
-    border-radius: var(--radius);
-    margin-bottom: 4px;
+#tabs-subcontainer .tab:not(.active):hover,
+#tabs-tabbar-container [aria-label="Tab Stack Toolbar"] .tab:not(.active):hover,
+#tabs-tabbar-container .tabbar-wrapper + .tabbar-wrapper .tab:not(.active):hover,
+#tabs-tabbar-container .tabbar-subcontainer .tab:not(.active):hover {
+    background: var(--bg) !important;
+    backdrop-filter: var(--blurMed) !important;
+    -webkit-backdrop-filter: var(--blurMed) !important;
 }
 
-.tabs-left .tabbar-wrapper { /* BG COLOR OF TAB BAR PART 3 */
-    margin-bottom: 4px;
-}
-
-.color-behind-tabs-on .tab {
-    color: var(--colorFg); /* FONT COLOR OF NON ACTIVE TAB */
-}
-
-.density-on .tab.active:not(.tab-in-accordion, .tab-accordion) {
-    box-shadow: none; /* REMOVE SHADOW UNDER ACTIVE TAB */
-}
-
-.separator hr { /* ADJUSTING SEPARATOR UNDER PINNED TABS */
-    border: 1px solid color-mix(in srgb, var(--colorBg), var(--lessTransparent));
-    background: color-mix(in srgb, var(--colorBg), var(--lessTransparent));
-    opacity: 0.5;
-    width: 100%;
-    margin-top: 6px;
-}
-
-@media not (prefers-contrast: more) { /* HIDE TAB SCROLLBAR */
-    ::-webkit-scrollbar {
-        display: none;
-    }
-}
-
-#tabs-container.left:has(.tab-strip.overflow),
-#tabs-container.right:has(.tab-strip.overflow) {
-    padding-right: 3px; /* FIXING SPACE NEXT TO TAB WHEN MANY TABS */
-}
-
+/* Add padding inside parent tabbar */
 #tabs-tabbar-container {
-    padding: 0px 2px 0px 2px;  /* ADDING SPACE NEXT TO TABS */
+    padding-bottom: 6px !important;
 }
 
-#browser.color-behind-tabs-on .tab.active.active { /* BG OF ACTIVE TAB */
-    background-color: var(--colorBg);
+/* Apply padding to the outer tabbar container when tabs are bottom */
+#browser.tabs-bottom #tabs-tabbar-container {
+    padding-top: 6px !important;
 }
 
-#tabs-container .tab:not(.tab-group,.tab.active):hover { /* HOVER OF TABS */
-    background-color: var(--colorBg);
+/* Bottom tabbar styling */
+#browser.tabs-bottom:not(.transparent-tabbar) #tabs-tabbar-container {
+    margin: 0 5px 5px 5px !important; /* adjust spacing for bottom */
+    border-radius: var(--radius) !important;
 }
 
-#browser:not(.theme-dark) #tabs-tabbar-container.left { /* HIDE WEIRD BORDER BETWEEN TAB SECTION AND WEB PAGE */
-    box-shadow: none;
+/* Remove the solid background behind the bottom bar */
+#browser.tabs-bottom #footer {
+    background: transparent !important;
 }
 
-.tab.active .favicon {
-    filter: none !important; /* HIDE FAVICON WHITE BORDER */
+/* add padding to bottom tabs when using tab stack */
+#browser.tabs-bottom #tabs-tabbar-container {
+    padding-bottom: 10px !important; /* default 5px + 5px extra gap */
 }
 
-.svg-tab-stack .stack-frame { /* BORDER COLOR OF TAB GROUP */
-    /* stroke: transparent; */
-    /* stroke-width: 2px; */
+/* ======================== */
+/* FIX vertical tabs margin */
+/* ======================== */
+
+/* Left side */
+.tabs-left #tabs-tabbar-container {
+    margin-bottom: 4px !important;
+	margin-right: 0px !important;
+    margin-top: 0px !important;
 }
 
-#browser .tab-position.colored .tab:not(.active) {
-    background-color: color-mix(in srgb, var(--colorBg), var(--lessTransparent));  /* BG COLOR OF TAB GROUP  */
-    color: var(--colorFg);
+/* Right side: use container instead */
+.tabs-right #tabs-tabbar-container {
+    margin-bottom: 4px !important;
+	margin-left: 0px !important;
+	margin-top: 0px !important;
 }
 
-#browser .tab-position.colored.accordion-toggle-arrow:hover,
-#browser .tab-position.colored .tab:not(.active):hover {
-    background-color: var(--colorBg);  /* BG COLOR OF HOVER TAB IN GROUP */ 
+/* ============================================= */
+/* Fix missing margin between bottom and sidebar */
+/* ============================================= */
+
+#browser #panels-container.left,
+#browser #panels-container.right {
+    margin-bottom: 4px !important;
 }
 
-#browser .tab-position.colored.accordion-toggle-arrow,
-#browser .tab-position.colored .tab.active {
-    background-color: var(--colorBg);  /* BG COLOR OF ACTIVE TAB IN GROUP */ 
+/* Collapse header/titlebar completely when tabs are hidden
+   BUT keep it in popup/settings windows */
+   
+#browser.tabs-off #tabs-tabbar-container,
+#browser.tabs-off #header {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-#browser .tab-position.colored.accordion-toggle-arrow { /* ARROW SETTINGS */
-    background-color: color-mix(in srgb, var(--colorBg), var(--lessTransparent));
-    color: var(--colorFg);
+/* ======================= */
+/* Horizontal Menu Styling */
+/* ======================= */
+
+/* Make sure header/titlebar don't override */
+#browser #header,
+#browser #titlebar {
+    background: transparent !important;
+    box-shadow: none !important;
 }
 
-#browser .tab-position.colored .tab:not(.marked) + svg .stack-frame {
-    stroke: transparent; /* BORDER COLOR OF TAB GROUP */
+.menubar {
+    background-color: var(--bg) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-radius: var(--radius) !important;
+    margin: 4px;
+    height: 28px !important; 
+    display: flex;
+    align-items: center;
 }
 
+/* Menu items */
+.menubar > .menuitem {
+    color: var(--colorFg) !important;
+    background: transparent !important;
+    border-radius: var(--radius);
+    padding: 0 10px !important;
+    transition: background-color 0.2s ease, backdrop-filter 0.2s ease;
+}
+
+/* Hover */
+.menubar > .menuitem:hover {
+    background-color: var(--bg) !important;
+    backdrop-filter: var(--blurMed) !important;
+}
+
+/* Active / pressed state */
+.menubar > .menuitem:active,
+.menubar > .menuitem[open] {
+    background-color: var(--bg) !important;
+    backdrop-filter: var(--blurMedHigh) !important;
+}
+
+/* ============================ */
+/* FIX History panel tree items */
+/* ============================ */
+
+#history-panel .vivaldi-tree .tree-row {
+    background-color: transparent !important; /* Semi-transparent bg */
+    backdrop-filter: var(--blurMed) !important; /* Apply blur for glass effect */
+    -webkit-backdrop-filter: var(--blurMed) !important;
+    transition: backdrop-filter var(--anim-duration) ease, background-color var(--anim-duration) ease;
+}
+
+/* === Fix: Bookmark bar to appear below the suggestions === */
+.bookmark-bar {
+    z-index: 5 !important;
+}
+
+/* =============================*/
+/* Fix window buttons alignment */
+/* ===========================]*/
+#browser.win.tabs-left .window-buttongroup,
+#browser.win.tabs-right .window-buttongroup,
+#browser.win.tabs-off .window-buttongroup {
+    right: 0px !important;
+    margin-right: 0px !important;
+}
+
+/* ========================= */
+/* FIX: Colored Tab Groups   */
+/* ========================= */
+
+/* Group title / text color */
+#browser .tab-position.colored .tab-group-indicator,
+#browser .tab-position.colored .tabbar-group-title {
+    color: var(--colorFg) !important;
+}
+
+/* === Stack counter fix for both light & dark themes === */
 #browser .tab-position.colored .stack-counter {
-    background-color: var(--colorHighlightBg); /* BG COLOR OF TAB GROUP NUMBER */
+    background-color: var(--colorHighlightBg) !important; 
+    color: var(--colorHighlightFg) !important; 
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 0 6px;
+    min-width: 16px;
+    text-align: center;
 }
 
-.tabs-left #tabs-container .toolbar-tabbar-after,
-.tabs-right #tabs-container .toolbar-tabbar-after {
-    margin-top: 13px; /* ADJUSTING NEW TAB ICON */
-    margin-bottom: 2px;
-}
-
-/* WORKSPACES */
-
-.color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar,
-.color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar,
-.color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar:hover,
-.color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar:hover {
-    color: var(--colorFg);
-    margin-top: 5px;
-} /* ADJUSTING WORKSPACE BUTTON */
-
-.tabs-left .button-toolbar.workspace-popup.tabbar-workspace-button,
-.tabs-right .button-toolbar.workspace-popup.tabbar-workspace-button {
-    background-color: transparent; /* BG OF WORKSPACE BUTTON */
-}
-
-#tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar > button:active,
-#tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar > button:active,
-#tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover,
-#tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover {
-    background-color: rgba(0, 255, 200, 0.08) !important;
-    transform: scale(1.04);
-    box-shadow: 0 0 12px rgba(0, 255, 200, 0.9); /* HOVER OF WORKSPACES */
-}
-
-.tabs-left #tabs-container:has(.tab-strip.overflow) .toolbar-tabbar-before,
-.tabs-left #tabs-container:has(.tab-strip.overflow) .toolbar-tabbar-after,
-.tabs-right #tabs-container:has(.tab-strip.overflow) .toolbar-tabbar-before,
-.tabs-right #tabs-container:has(.tab-strip.overflow) .toolbar-tabbar-after {
-    padding: 0px 0px 3px 3px; /* FIXING SPACE WHEN MANY TABS */
+/* Ensure inactive tab group text stays theme-aware */
+#browser .tab-position.colored .tab:not(.active) .tab-header {
+    color: var(--colorFg) !important;
 }
 
 /* TAB TILES MODE */
@@ -865,4 +964,18 @@ button.button-startpage.add-set:hover svg path {
 .isblurred .webpageview.tiled.active {
     box-shadow: 0 0 0 2px var(--colorHighlightBg); /* CHANGING COLOR OF BORDER OF ACTIVE WHEN BROWSER ISNT FOCUSED */
 }
+
+/* Hide header when tabs are on top and hidden */
+/*
+#header {
+display: none !important;
+}
+*/
+
+/* hide vivaldi button */
+/*
+button.vivaldi {
+    display: none !important;  
+}
+*/
 
