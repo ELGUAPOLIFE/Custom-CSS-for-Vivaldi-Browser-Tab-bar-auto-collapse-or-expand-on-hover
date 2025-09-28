@@ -80,9 +80,6 @@ Do translate menu
 .disable-titlebar.address-top#browser:not(.tabs-top) .vivaldi {
     margin: 0 4px;
 }
-*/
-
-/* Search bar & address bar */
 
 .SearchField, .UrlBar-AddressField {
     border: none !important;
@@ -102,6 +99,7 @@ Do translate menu
     --HighlightColor: var(--colorFg);
     --LowlightColor: var(--colorFg);
 }
+*/
 
 /* SIDEBAR */
 
@@ -397,33 +395,6 @@ footer .toolbar-statusbar {
 #browser .tab-position.colored .stack-counter {
     background-color: var(--colorHighlightBg);
 }
-
-/* INNER ROUND BORDERS */
-
-#browser:not(.fullscreen) #webpage-stack {
-    margin: 0 4px 4px 4px;
-    border-radius: var(--radius);
-    /*
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    background-color: var(--bg);
-    */                                      /*Use this for blurred webpage background*/
-    box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.20);
-                                            /*Use this for shadow on the webpage*/
-}
-
-/* Remove all background images */
-
-/*
-#main, 
-.startpage,
-.startpage-content,
-.webpage,
-#browser {
-    background-image: none !important;
-    background-color: transparent !important;
-}
-*/
 
 /* ======================= */
 /* Fullscreen gap killer   */
@@ -941,6 +912,73 @@ button.button-startpage:after { content: unset; }
 #browser .tab-position.colored .tab:not(.active) .tab-header {
     color: var(--colorFg) !important;
 }
+
+/* ---------------------------
+   Fix: Address Bar inside Tab Bar (Vivaldi 7.6)
+   --------------------------- */
+
+/* Address & Search fields inside tab bar */
+#tabs-tabbar-container .UrlBar .UrlBar-AddressField,
+#tabs-tabbar-container .UrlBar .SearchField,
+#tabs-tabbar-container .toolbar-mainbar .UrlBar-AddressField,
+#tabs-tabbar-container .toolbar-mainbar .SearchField,
+.tabbar-wrapper .UrlBar-AddressField,
+.tabbar-wrapper .SearchField {
+    background-color: var(--bg) !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: var(--radius) !important;
+}
+
+/* Ensure tab bar has proper stacking */
+#tabs-tabbar-container {
+    z-index: 1 !important;
+    position: relative !important;
+}
+
+/* Force window controls to appear above tab bar */
+.window-buttongroup {
+    z-index: 1000 !important;
+}
+
+/* Force settings button to appear above tab bar */
+.vivaldi, .sidebar .button-toolbar.settings, .button-settings {
+    z-index: 1001 !important;
+}
+
+/* Ensure inner panel content respects sidebar radius */
+#panels-container .panel-group,
+#panels .webpanel-stack .webpanel .webpanel-content {
+    border-radius: var(--radius) !important;
+    overflow: hidden; 
+}
+
+/* INNER ROUND BORDERS */
+
+#browser:not(.fullscreen) #webpage-stack {
+    margin: 0 4px 4px 4px;
+    border-radius: var(--radius);
+    /*
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: var(--bg);
+    */                                      /*Use this for blurred webpage background*/
+    box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.20);
+                                            /*Use this for shadow on the webpage*/
+}
+
+/* Remove all background images */
+
+/*
+#main, 
+.startpage,
+.startpage-content,
+.webpage,
+#browser {
+    background-image: none !important;
+    background-color: transparent !important;
+}
+*/
 
 /* TAB TILES MODE */
 
