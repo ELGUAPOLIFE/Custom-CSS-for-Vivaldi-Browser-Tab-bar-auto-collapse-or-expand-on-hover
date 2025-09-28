@@ -37,18 +37,19 @@ Do translate menu
     --bgDisabled: var(--bgDisabledLight);
 }
 
+/* Turn it on if you do not want ZEN style*/
 /* MAINBAR */
-
+/*
 #browser.win.address-top .toolbar-mainbar:has(.window-buttongroup.on-mainbar),
 #browser.linux.address-top .toolbar-mainbar:has(.window-buttongroup.on-mainbar) {
     min-height: calc(38px / var(--uiZoomLevel));
 }
-/*
+
 .density-on .UrlBar-SearchField, 
 .density-on .UrlBar-AddressField {
     height: 32px;
 }
-*/
+
 .disable-titlebar#browser.win .window-buttongroup {
     height: 38px;
 }
@@ -79,7 +80,7 @@ Do translate menu
 .disable-titlebar.address-top#browser:not(.tabs-top) .vivaldi {
     margin: 0 4px;
 }
-
+*/
 
 /* Search bar & address bar */
 
@@ -352,6 +353,8 @@ footer .toolbar-statusbar {
     height: 30px;
 }
 
+/* Turn it on if you do not want ZEN style*/
+/*
 #titlebar {
     position: absolute;
     width: 100%;
@@ -360,6 +363,7 @@ footer .toolbar-statusbar {
     right: 0px;
     pointer-events: none;
 }
+*/
 
 #browser.win .window-buttongroup {
     position: absolute;
@@ -404,9 +408,8 @@ footer .toolbar-statusbar {
     -webkit-backdrop-filter: blur(12px);
     background-color: var(--bg);
     */                                      /*Use this for blurred webpage background*/
-    /*
-    box-shadow: inset 0 0 12px 0 rgba(0, 0, 0, 0.16);
-    */                                        /*Use this for shadow on the webpage*/
+    box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.20);
+                                            /*Use this for shadow on the webpage*/
 }
 
 /* Remove all background images */
@@ -965,17 +968,47 @@ button.button-startpage:after { content: unset; }
     box-shadow: 0 0 0 2px var(--colorHighlightBg); /* CHANGING COLOR OF BORDER OF ACTIVE WHEN BROWSER ISNT FOCUSED */
 }
 
-/* Hide header when tabs are on top and hidden */
+/* Hide header completely when tabs are on top and hidden */
 /*
 #header {
 display: none !important;
 }
 */
 
-/* hide vivaldi button */
+/* Resize the window button group */
 /*
+.window-buttongroup {
+    height: 24px !important; }  /* মোট height */   
+
+/*
+.window-buttongroup button {
+    width: 24px !important;    /* প্রতিটা বাটনের প্রস্থ */ /*
+    height: 24px !important;   /* প্রতিটা বাটনের উচ্চতা */ /*
+    padding: 0 !important;
+    margin: 0 2px !important;  /* বাটনের মাঝে gap */ /*
+    font-size: 14px !important; /* আইকনের সাইজ */ /*
+}
+*/
+
+/* ZEN HEADER - HIDE HEADER UNTIL HOVER */
+
+#header { 
+    min-height: 8px !important;
+    opacity: 0;
+    overflow: hidden;
+    transition: height 0.3s ease, opacity 0.3s ease;
+    z-index: 9999;
+    pointer-events: none;
+    margin-top: 0px !important;
+}
+
+#header:hover {
+  height: 25px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
 button.vivaldi {
     display: none !important;  
 }
-*/
 
