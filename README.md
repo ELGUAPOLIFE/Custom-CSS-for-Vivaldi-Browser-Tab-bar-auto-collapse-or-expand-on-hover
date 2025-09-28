@@ -2,7 +2,7 @@
 
 ![Zen like Vivaldi-Air](https://github.com/ELGUAPOLIFE/Custom-CSS-for-Vivaldi-Browser-Tab-bar-auto-collapse-or-expand-on-hover/blob/main/Screenshot%202025-09-28%20134117.png)
 
-Actual Repository of Vivaldi-Air : https://github.com/MohamedxSalah/Vivaldi-Air by MohamedxSalah ( https://github.com/MohamedxSalah )
+Actual Repository of [Vivaldi-Air](https://github.com/MohamedxSalah/Vivaldi-Air) by the owner [MohamedxSalah](https://github.com/MohamedxSalah)
 
 1. Open Vivaldi Browser
 2. Type vivaldi:experiments on address bar and hit enter
