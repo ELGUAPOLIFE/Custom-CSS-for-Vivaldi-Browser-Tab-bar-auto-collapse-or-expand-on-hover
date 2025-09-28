@@ -1,6 +1,6 @@
-# Vivaldi Air But Calm Like Zen
+# Vivaldi-Air But Calm Like Zen
 
-https://github.com/ELGUAPOLIFE/Custom-CSS-for-Vivaldi-Browser-Tab-bar-auto-collapse-or-expand-on-hover/blob/main/Screenshot%202025-09-28%20134117.png
+![Zen like Vivaldi-Air](https://github.com/ELGUAPOLIFE/Custom-CSS-for-Vivaldi-Browser-Tab-bar-auto-collapse-or-expand-on-hover/blob/main/Screenshot%202025-09-28%20134117.png)
 
 Actual Repository of Vivaldi-Air : https://github.com/MohamedxSalah/Vivaldi-Air by MohamedxSalah ( https://github.com/MohamedxSalah )
 
